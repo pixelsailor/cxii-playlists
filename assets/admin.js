@@ -12,32 +12,53 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderTracks () {
     container.innerHTML = '';
     tracks.forEach((track, index) => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'cp-track-block';
-      wrapper.style = 'border:1px solid #ccc; padding: 10px; margin-bottom: 10px;';
+      const wrapper = document.createElement('fieldset');
+      wrapper.className  = 'cp-track-block';
 
       wrapper.innerHTML = `
-        <label>Track title:</label>
-        <input type="text" class="track-title" value="${track.title || ''}" /><br />
-       
-        <label>Track artist:</label>
-        <input type="text" class="track-artist" value="${track.artist || ''}" /><br />
-        
-        <label>Media file URL:</label>
-        <div class="media-wrapper">
-          <input text="text" class="track-file" value="${track.file || ''}" readonly />
-          <button type="button" class="select-media">Select file</button>
+        <div class="inline-edit-wrapper">
+          <fieldset class="inline-edit-col-left">
+            <div class="inline-edit-col">
+              <label>
+                <span class="title">Track title</span>
+                <span class="input-text-wrap">
+                  <input type="text" class="track-title" id="track_title" name="track_title" value="${track.title || ''}" />
+                </span>
+              </label>
+              <label>
+                <span class="title">Track artist</span>
+                <span class="input-text-wrap">
+                  <input type="text" class="track-artist" id="track_artist" name="track_artist" value="${track.artist || ''}" />
+                </span>
+              </label>
+              <div class="inline-edit-group wp-clearfix">
+                <label class="alignleft">
+                  <span class="title">Media file</span>
+                  <input text="text" class="track-file" id="track_file" name="track_file" value="${track.file || ''}" readonly />
+                </label>
+                <button type="button" class="button select-media">Select file</button>
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" class="track-downloadable" id="downloadable" name="downloadable" ${track.downloadable ? 'checked' : ''} />
+                  <span class="checkbox-title">Downloadable</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="inline-edit-col-right">
+            <div class="inline-edit-col">
+              <label>
+                <span class="title">Lyrics</span>
+                <textarea class="track-lyrics" id="track_lyrics" name="track_lyrics" rows="3">${track.lyrics || ''}</textarea>
+              </label>
+            </div>
+          </fieldset>
+          <br class="clear" />
+          <div class="submit inline-edit-save">
+            <button type="button" class="button remove-track">Remove track</button>
+          </div>
         </div>
-        
-        <label>Lyrics:</label>
-        <textarea class="track-lyrics" rows="3">${track.lyrics || ''}</textarea><br />
-
-        <label>
-          <input type="checkbox" class="track-downloadable" ${track.downloadable ? 'checked' : ''} />
-          Downloadable
-        </label><br />
-
-        <button type="button" class="remove-track">Remove track</button>
       `;
 
       // Remove button

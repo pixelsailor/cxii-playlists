@@ -44,17 +44,29 @@ function cp_playlist_meta_box_callback($post) {
   $tracks = get_post_meta($post->ID, 'tracks', true) ?: [];
 
   ?>
-  <label>Release date:</label>
-  <input type="date" name="release_date" value="<?php echo esc_attr($release_date); ?>" /><br /><br />
+  <table class="form-table widefat">
+    <tr>
+      <th scope="row">
+        <label for="release_date">Release date:</label>
+      </th>
+      <td>
+        <input type="date" id="release_date" class="regular-text" name="release_date" value="<?php echo esc_attr($release_date); ?>" /><br /><br />
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <label for="artist_name">Artist name:</label>
+      </th>
+      <td>
+        <input type="text" class="regular-text" id="artist_name" name="artist_name" value="<?php echo esc_attr($artist_name); ?>" /><br /><br />
+      </td>
+    </tr>
+    <tr class="inline-edit-row inline-edit-row-page quick-edit-row-page quick-edit-row inline-edit-page inline-editor">
+      <td colspan="2" id="cp-tracks-container"></td>
+    </tr>
+  </table>
   
-  <label>Artist name:</label>
-  <input type="text" name="artist_name" value="<?php echo esc_attr($artist_name); ?>" /><br /><br />
-  
-  <div id="cp-tracks-container">
-
-  </div>
-
-  <button type="button" id="cp-add-track">+ Add track</button>
+  <button type="button" class="button" id="cp-add-track">Add track</button>
 
   <script>
     const savedTracks = <?php echo json_encode($tracks); ?>;
