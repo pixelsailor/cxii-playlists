@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('cp-tracks-container');
-  const addButton = document.getElementById('cp-add-track');
+  const container = document.getElementById('cxii-tracks-container');
+  const addButton = document.getElementById('cxii-add-track');
 
   const jsonInput = document.createElement('input');
   jsonInput.type = 'hidden';
-  jsonInput.name = 'tracks_json';
+  jsonInput.name = 'cxii_tracks_json';
   container.parentNode.appendChild(jsonInput);
 
   const tracks = Array.isArray(savedTracks) ? savedTracks : [];
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = '';
     tracks.forEach((track, index) => {
       const wrapper = document.createElement('fieldset');
-      wrapper.className  = 'cp-track-block';
+      wrapper.className  = 'cxii__track';
 
       wrapper.innerHTML = `
         <div class="inline-edit-wrapper">
@@ -22,25 +22,25 @@ document.addEventListener('DOMContentLoaded', () => {
               <label>
                 <span class="title">Track title</span>
                 <span class="input-text-wrap">
-                  <input type="text" class="track-title" id="track_title" name="track_title" value="${track.title || ''}" />
+                  <input type="text" class="cxii__track__title" id="cxii_track_title" name="cxii_track_title" value="${track.title || ''}" />
                 </span>
               </label>
               <label>
                 <span class="title">Track artist</span>
                 <span class="input-text-wrap">
-                  <input type="text" class="track-artist" id="track_artist" name="track_artist" value="${track.artist || ''}" />
+                  <input type="text" class="cxii__track__artist" id="cxii_track_artist" name="cxii_track_artist" value="${track.artist || ''}" />
                 </span>
               </label>
               <div class="inline-edit-group wp-clearfix">
                 <label class="alignleft">
                   <span class="title">Media file</span>
-                  <input text="text" class="track-file" id="track_file" name="track_file" value="${track.file || ''}" readonly />
+                  <input text="text" class="cxii__track__file" id="cxii_track_file" name="cxii_track_file" value="${track.file || ''}" readonly />
                 </label>
                 <button type="button" class="button select-media">Select file</button>
               </div>
               <div>
                 <label>
-                  <input type="checkbox" class="track-downloadable" id="downloadable" name="downloadable" ${track.downloadable ? 'checked' : ''} />
+                  <input type="checkbox" class="cxii__track__downloadable" id="cxii_downloadable" name="cxii_downloadable" ${track.downloadable ? 'checked' : ''} />
                   <span class="checkbox-title">Downloadable</span>
                 </label>
               </div>
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="inline-edit-col">
               <label>
                 <span class="title">Lyrics</span>
-                <textarea class="track-lyrics" id="track_lyrics" name="track_lyrics" rows="3">${track.lyrics || ''}</textarea>
+                <textarea class="cxii__track__lyrics" id="cxii_track_lyrics" name="cxii_track_lyrics" rows="3">${track.lyrics || ''}</textarea>
               </label>
             </div>
           </fieldset>
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const mediaButton = wrapper.querySelector('.select-media');
-      const fileInput = wrapper.querySelector('.track-file');
+      const fileInput = wrapper.querySelector('.cxii__track__file');
 
       mediaButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -97,13 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateJSON() {
     const updatedTracks = [];
-    container.querySelectorAll('.cp-track-block').forEach((block) => {
+    container.querySelectorAll('.cxii__track').forEach((block) => {
       updatedTracks.push({
-        title: block.querySelector('.track-title').value,
-        artist: block.querySelector('.track-artist').value,
-        file: block.querySelector('.track-file').value,
-        lyrics: block.querySelector('.track-lyrics').value,
-        downloadable: block.querySelector('.track-downloadable').checked
+        title: block.querySelector('.cxii__track__title').value,
+        artist: block.querySelector('.cxii__track__artist').value,
+        file: block.querySelector('.cxii__track__file').value,
+        lyrics: block.querySelector('.cxii__track__lyrics').value,
+        downloadable: block.querySelector('.cxii__track__downloadable').checked
       });
     });
 

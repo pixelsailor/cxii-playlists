@@ -2,7 +2,7 @@
 add_action('init', 'cp_register_playlist_post_type');
 
 function cp_register_playlist_post_type() {
-  register_post_type('playlist', [
+  register_post_type('cxii_playlist', [
     'labels' => [
       'name' => 'Playlists',
       'singular_name' => 'Playlist',
